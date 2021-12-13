@@ -9,14 +9,24 @@ import com.example.poplibraries.databinding.FragmentUserBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserFragment(private val user: UserData) : MvpAppCompatFragment(), UserView {
+class UserFragment() : MvpAppCompatFragment(), UserView {
 
     companion object {
-        fun newInstance(user: UserData) = UserFragment(user)
+        private const val USER_DATA = "user_data"
+
+        fun newInstance(user: UserData) = UserFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(USER_DATA, user)
+            }
+        }
     }
 
+    private val user: UserData? by lazy {
+        arguments?.getParcelable(USER_DATA)
+    }
     private val presenter: UserPresenter by moxyPresenter { UserPresenter(user) }
     private lateinit var vb: FragmentUserBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,12 +35,6 @@ class UserFragment(private val user: UserData) : MvpAppCompatFragment(), UserVie
     ) = FragmentUserBinding.inflate(inflater, container, false).also {
         vb = it
     }.root
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        presenter.init()
-        retainInstance = true //временное решение, чтобы пережить переворот экрана в этом фрагменте
-    }
 
     override fun setUserLogin(login: String) {
         vb.mainTextView.text = login

@@ -1,12 +1,11 @@
 
-package com.example.poplibraries
+package com.example.poplibraries.mvpmain
 
 import android.os.Bundle
+import com.example.poplibraries.R
 import com.example.poplibraries.application.App
 import com.example.poplibraries.databinding.ActivityMainBinding
-import com.example.poplibraries.mvpmain.MainPresenter
 import com.example.poplibraries.navigation.AndroidScreens
-import com.example.poplibraries.mvpmain.MainView
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter

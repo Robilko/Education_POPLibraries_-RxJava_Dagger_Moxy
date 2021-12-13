@@ -4,13 +4,12 @@ import com.example.poplibraries.data.UserData
 import moxy.MvpPresenter
 
 class UserPresenter(
-    private val user: UserData
+    private val user: UserData?
 ) : MvpPresenter<UserView>() {
 
     override fun onFirstViewAttach() {
-        viewState.setUserLogin(user.login)
+        user?.let {
+            viewState.setUserLogin(it.login)
+        }
     }
-
-    fun init() {}
-
 }

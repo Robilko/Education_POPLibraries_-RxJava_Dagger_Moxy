@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.POPLibraries">
         <activity
-            android:name=".StartActivity"
+            android:name=".mvpmain.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
