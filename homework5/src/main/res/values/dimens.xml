@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="user_fragment_default_margin">16dp</dimen>
+    <dimen name="user_fragment_fields_text_size">15sp</dimen>
+    <dimen name="user_fragment_avatar_size">40dp</dimen>
+    <dimen name="user_fragment_login_text_size">24sp</dimen>
+</resources>

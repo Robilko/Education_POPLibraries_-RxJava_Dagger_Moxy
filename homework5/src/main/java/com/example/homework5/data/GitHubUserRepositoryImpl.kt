@@ -7,11 +7,7 @@ class GitHubUserRepositoryImpl : GitHubUserRepository {
 
     private val gitHubApi = GitHubApiFactory.create()
 
-    override fun getUsers(): Single<List<GitHubUser>> {
-        return gitHubApi.fetchUsers()
-    }
+    override fun getUsers(): Single<List<GitHubUser>> = gitHubApi.fetchUsers()
 
-    override fun getUserByLogin(userId: String): GitHubUser? {
-        return null
-    }
+    override fun getUserByLogin(login: String): Single<GitHubUser> = gitHubApi.fetchUserByLogin(login)
 }
