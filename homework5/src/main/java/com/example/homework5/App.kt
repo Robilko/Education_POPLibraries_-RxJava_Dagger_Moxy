@@ -1,10 +1,21 @@
 package com.example.homework5
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import com.example.homework5.navigation.CustomRouter
 import com.github.terrakok.cicerone.Cicerone
 
 class App: Application() {
+
+    @SuppressLint("StaticFieldLeak")
+    object ContextHolder { lateinit var context: Context }
+
+
+    override fun onCreate() {
+        super.onCreate()
+        ContextHolder.context = this
+    }
 
     companion object Navigation {
 

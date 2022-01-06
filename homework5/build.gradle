@@ -46,20 +46,20 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.6.0"
+    implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.6.10"
 
     //Moxy
-    implementation "com.github.moxy-community:moxy:2.1.2"
-    kapt "com.github.moxy-community:moxy-compiler:2.1.2"
-    implementation "com.github.moxy-community:moxy-ktx:2.1.2"
-    implementation "com.github.moxy-community:moxy-androidx:2.1.2"
+    implementation "com.github.moxy-community:moxy:2.2.2"
+    kapt "com.github.moxy-community:moxy-compiler:2.2.2"
+    implementation "com.github.moxy-community:moxy-ktx:2.2.2"
+    implementation "com.github.moxy-community:moxy-androidx:2.2.2"
 
     //RX
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
     //Cicerone
-    implementation 'com.github.terrakok:cicerone:7.0'
+    implementation 'com.github.terrakok:cicerone:7.1'
 
     //Retrofit
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
@@ -71,4 +71,9 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:4.12.0"
     implementation "com.github.bumptech.glide:glide:4.12.0"
     implementation "com.github.bumptech.glide:okhttp3-integration:4.12.0@aar"
+
+    //Room
+    implementation 'androidx.room:room-runtime:2.4.0'
+    implementation "androidx.room:room-rxjava3:2.4.0"
+    kapt 'androidx.room:room-compiler:2.4.0'
 }
