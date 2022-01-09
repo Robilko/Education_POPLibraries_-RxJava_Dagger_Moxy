@@ -1,21 +1,23 @@
 package com.example.homework5.data
 
-import com.example.homework5.data.retrofit.GitHubApiFactory
-import com.example.homework5.data.room.RoomFactory
+import com.example.homework5.data.retrofit.GitHubApi
+import com.example.homework5.data.room.DBStorage
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class GitHubUserRepositoryImpl : GitHubUserRepository {
-
-    private val gitHubApi = GitHubApiFactory.create()
-    private val roomDb = RoomFactory.create().getGitHubUserDao()
+class GitHubUserRepositoryImpl
+@Inject constructor(
+    private val gitHubApi: GitHubApi,
+    private val roomDb: DBStorage
+) : GitHubUserRepository {
 
     override fun getUsers(): Single<List<GitHubUser>> {
-        return roomDb.getUsers()
+        return roomDb.getGitHubUserDao().getUsers()
             .flatMap {
                 if (it.isEmpty()) {
                     gitHubApi.fetchUsers()
                         .map { resultFromServer ->
-                            roomDb.saveUser(resultFromServer)
+                            roomDb.getGitHubUserDao().saveUser(resultFromServer)
                             resultFromServer
                         }
                 } else {
@@ -25,6 +27,6 @@ class GitHubUserRepositoryImpl : GitHubUserRepository {
     }
 
     override fun getUserByLogin(login: String): Single<GitHubUser> {
-        return roomDb.getUserByLogin(login)
+        return roomDb.getGitHubUserDao().getUserByLogin(login)
     }
 }

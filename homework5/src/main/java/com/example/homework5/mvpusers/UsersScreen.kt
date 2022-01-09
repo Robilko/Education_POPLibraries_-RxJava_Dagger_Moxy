@@ -6,6 +6,6 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object UsersScreen : FragmentScreen {
 
-    override fun createFragment(factory: FragmentFactory): Fragment  = UsersFragment.newInstance()
+    override fun createFragment(factory: FragmentFactory): Fragment = UsersFragment.newInstance()
 
 }

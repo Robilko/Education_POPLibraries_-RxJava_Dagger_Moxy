@@ -1,28 +1,23 @@
 package com.example.homework5
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
-import com.example.homework5.navigation.CustomRouter
-import com.github.terrakok.cicerone.Cicerone
+import com.example.homework5.dagger.AppComponent
+import com.example.homework5.dagger.DaggerAppComponent
 
-class App: Application() {
+class App : Application() {
 
-    @SuppressLint("StaticFieldLeak")
-    object ContextHolder { lateinit var context: Context }
+    lateinit var appComponent: AppComponent
 
 
     override fun onCreate() {
         super.onCreate()
-        ContextHolder.context = this
+        instance = this
+        appComponent = DaggerAppComponent.builder()
+            .setContext(this)
+            .build()
     }
 
-    companion object Navigation {
-
-        private val cicerone: Cicerone<CustomRouter> by lazy {
-            Cicerone.create(CustomRouter())
-        }
-        val navigatorHolder = cicerone.getNavigatorHolder()
-        val router = cicerone.router
+    companion object {
+        lateinit var instance: App
     }
 }

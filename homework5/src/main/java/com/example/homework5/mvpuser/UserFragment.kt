@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.transition.Visibility
 import com.bumptech.glide.Glide
-import com.example.homework5.App.Navigation.router
+import com.example.homework5.App
 import com.example.homework5.R
 import com.example.homework5.data.GitHubUser
-import com.example.homework5.data.GitHubUserRepositoryFactory
 import com.example.homework5.databinding.ViewUserBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserFragment: MvpAppCompatFragment(R.layout.view_user), UserView {
+class UserFragment : MvpAppCompatFragment(R.layout.view_user), UserView {
 
     private lateinit var viewBinding: ViewUserBinding
 
@@ -23,11 +21,9 @@ class UserFragment: MvpAppCompatFragment(R.layout.view_user), UserView {
     }
 
     private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(
-            userLogin = userLogin,
-            userRepository = GitHubUserRepositoryFactory.create(),
-            router = router
-        )
+        UserPresenter(userLogin = userLogin).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

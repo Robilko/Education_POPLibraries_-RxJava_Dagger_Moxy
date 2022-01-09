@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.homework5.App.Navigation.router
+import com.example.homework5.App
 import com.example.homework5.R
 import com.example.homework5.data.GitHubUser
-import com.example.homework5.data.GitHubUserRepositoryFactory
 import com.example.homework5.databinding.ViewUsersBinding
 import com.example.homework5.recycler.UsersAdapter
 import moxy.MvpAppCompatFragment
@@ -17,10 +16,9 @@ class UsersFragment : MvpAppCompatFragment(R.layout.view_users), UsersView,
     UsersAdapter.OnUserClickListener {
 
     private val presenter: UsersPresenter by moxyPresenter {
-        UsersPresenter(
-            userRepository = GitHubUserRepositoryFactory.create(),
-            router = router
-        )
+        UsersPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     private val usersAdapter = UsersAdapter(this)
