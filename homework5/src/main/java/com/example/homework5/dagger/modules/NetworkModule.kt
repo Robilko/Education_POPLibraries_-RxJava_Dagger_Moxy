@@ -1,4 +1,4 @@
-package com.example.homework5.dagger
+package com.example.homework5.dagger.modules
 
 import com.example.homework5.data.retrofit.GitHubApi
 import com.google.gson.Gson

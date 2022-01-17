@@ -10,7 +10,6 @@ import com.example.homework5.R
 import com.example.homework5.data.GitHubRepo
 import com.example.homework5.data.GitHubUser
 import com.example.homework5.databinding.UserFragmentBinding
-import com.example.homework5.databinding.ViewUserBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -24,7 +23,7 @@ class UserFragment : MvpAppCompatFragment(R.layout.user_fragment), UserView {
 
     private val presenter: UserPresenter by moxyPresenter {
         UserPresenter(userLogin = userLogin).apply {
-            App.instance.appComponent.inject(this)
+            App.instance.appComponent.provideUserComponent().build().inject(this)
         }
     }
 
