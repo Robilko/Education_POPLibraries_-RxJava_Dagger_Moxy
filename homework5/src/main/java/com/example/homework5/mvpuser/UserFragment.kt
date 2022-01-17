@@ -7,14 +7,16 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.homework5.App
 import com.example.homework5.R
+import com.example.homework5.data.GitHubRepo
 import com.example.homework5.data.GitHubUser
+import com.example.homework5.databinding.UserFragmentBinding
 import com.example.homework5.databinding.ViewUserBinding
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserFragment : MvpAppCompatFragment(R.layout.view_user), UserView {
+class UserFragment : MvpAppCompatFragment(R.layout.user_fragment), UserView {
 
-    private lateinit var viewBinding: ViewUserBinding
+    private lateinit var viewBinding: UserFragmentBinding
 
     private val userLogin: String by lazy {
         arguments?.getString(ARG_USER_LOGIN).orEmpty()
@@ -28,12 +30,11 @@ class UserFragment : MvpAppCompatFragment(R.layout.view_user), UserView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding = ViewUserBinding.bind(view)
+        viewBinding = UserFragmentBinding.bind(view)
         viewBinding.userLogin.text = userLogin
     }
 
     override fun showUser(user: GitHubUser) {
-        viewBinding.userProperties.visibility = View.VISIBLE
         Glide.with(viewBinding.userAvatar.context)
             .load(user.avatarUrl)
             .into(viewBinding.userAvatar)
@@ -44,6 +45,15 @@ class UserFragment : MvpAppCompatFragment(R.layout.view_user), UserView {
 
     override fun showError(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showRepositories(repositories: List<GitHubRepo>) {
+        repositories.forEach { repo ->
+            with(viewBinding.userRepos) {
+                val addRepos = this.text.toString() + repo.full_name + "\n"
+                this.text = addRepos
+            }
+        }
     }
 
     companion object {
