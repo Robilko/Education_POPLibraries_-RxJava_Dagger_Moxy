@@ -2,7 +2,6 @@ package com.example.homework5.mvpuser
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.homework5.App
@@ -10,6 +9,7 @@ import com.example.homework5.R
 import com.example.homework5.data.GitHubRepo
 import com.example.homework5.data.GitHubUser
 import com.example.homework5.databinding.UserFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -43,16 +43,26 @@ class UserFragment : MvpAppCompatFragment(R.layout.user_fragment), UserView {
     }
 
     override fun showError(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_INDEFINITE)
+            .setAction("Retry", View.OnClickListener {
+                presenter.loadUser()
+            })
+            .show()
+
     }
 
     override fun showRepositories(repositories: List<GitHubRepo>) {
-        repositories.forEach { repo ->
-            with(viewBinding.userRepos) {
+        with(viewBinding.userRepos) {
+            this.text = null
+            repositories.forEach { repo ->
                 val addRepos = this.text.toString() + repo.full_name + "\n"
                 this.text = addRepos
             }
         }
+    }
+
+    override fun setProgressBarVisibility(isVisible: Boolean) {
+        viewBinding.progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     companion object {
