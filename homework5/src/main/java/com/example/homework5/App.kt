@@ -1,8 +1,8 @@
 package com.example.homework5
 
 import android.app.Application
-import com.example.homework5.dagger.AppComponent
-import com.example.homework5.dagger.DaggerAppComponent
+import com.example.homework5.dagger.components.AppComponent
+import com.example.homework5.dagger.components.DaggerAppComponent
 
 class App : Application() {
 

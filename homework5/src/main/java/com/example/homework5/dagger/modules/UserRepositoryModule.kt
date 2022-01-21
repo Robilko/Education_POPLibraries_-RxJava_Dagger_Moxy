@@ -1,4 +1,4 @@
-package com.example.homework5.dagger
+package com.example.homework5.dagger.modules
 
 import com.example.homework5.data.GitHubUserRepository
 import com.example.homework5.data.GitHubUserRepositoryImpl
@@ -9,10 +9,10 @@ import dagger.Provides
 import javax.inject.Named
 
 @Module
-class RepositoryModule {
+class UserRepositoryModule {
 
     @Provides
-    fun provideRepository(
+    fun provideUserRepository(
         @Named("prod") api: GitHubApi,
         dbStorage: DBStorage
     ): GitHubUserRepository {

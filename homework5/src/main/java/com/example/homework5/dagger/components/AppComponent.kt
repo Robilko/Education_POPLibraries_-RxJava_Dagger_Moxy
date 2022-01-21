@@ -1,8 +1,8 @@
-package com.example.homework5.dagger
+package com.example.homework5.dagger.components
 
 import android.content.Context
 import com.example.homework5.MainActivity
-import com.example.homework5.mvpuser.UserPresenter
+import com.example.homework5.dagger.modules.*
 import com.example.homework5.mvpusers.UsersPresenter
 import dagger.BindsInstance
 import dagger.Component
@@ -14,11 +14,13 @@ import javax.inject.Singleton
         AppModule::class,
         NetworkModule::class,
         CiceroneModule::class,
-        RepositoryModule::class,
+        UserRepositoryModule::class,
         RoomModule::class
     ]
 )
 interface AppComponent {
+
+    fun provideUserComponent(): UserComponent.Builder
 
     @Component.Builder
     interface Builder {
@@ -31,6 +33,5 @@ interface AppComponent {
 
     fun inject(activity: MainActivity)
     fun inject(activity: UsersPresenter)
-    fun inject(activity: UserPresenter)
 
 }

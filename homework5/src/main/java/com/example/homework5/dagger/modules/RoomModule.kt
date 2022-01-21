@@ -1,4 +1,4 @@
-package com.example.homework5.dagger
+package com.example.homework5.dagger.modules
 
 import android.content.Context
 import androidx.room.Room
