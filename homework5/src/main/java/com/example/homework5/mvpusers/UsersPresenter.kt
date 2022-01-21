@@ -20,15 +20,14 @@ class UsersPresenter(
         router.navigateTo(UserScreen(login))
     }
 
-    fun updateContent() {
+    private fun updateContent() {
         userRepository.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 viewState.showUsers(it)
-            }, {
-                val errorMessage = it.message
-                //DisplayError
+            }, { error ->
+                viewState.showError(error.message.toString())
             })
     }
 }

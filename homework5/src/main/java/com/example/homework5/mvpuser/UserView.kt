@@ -7,10 +7,6 @@ import moxy.viewstate.strategy.StateStrategyType
 @StateStrategyType(SingleStateStrategy::class)
 interface UserView : MvpView {
 
-    /**
-     * Показывает информацию о пользователе.
-     * @param user пользователь
-     */
     fun showUser(user: GitHubUser)
     fun showError(message: String)
 
