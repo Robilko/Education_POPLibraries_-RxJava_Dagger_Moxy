@@ -7,7 +7,8 @@ import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
-class CustomNavigator(activity: FragmentActivity, container: Int) : AppNavigator(activity, container) {
+class CustomNavigator(activity: FragmentActivity, container: Int) :
+    AppNavigator(activity, container) {
 
     override fun setupFragmentTransaction(
         screen: FragmentScreen,
